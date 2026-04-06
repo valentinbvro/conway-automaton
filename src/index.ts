@@ -227,11 +227,11 @@ async function run(): Promise<void> {
   };
 
   // Store identity in DB
-  db.setIdentity("name", config.name);
-  db.setIdentity("address", chainIdentity.address);
-  db.setIdentity("creator", config.creatorAddress);
-  db.setIdentity("chainType", resolvedChainType);
-  db.setIdentity("sandbox", config.sandboxId);
+  db.setIdentity("name", config.name || "Unknown Automaton");
+  db.setIdentity("address", chainIdentity?.address || "0xUNKNOWN");
+  db.setIdentity("creator", config.creatorAddress || "");
+  db.setIdentity("chainType", resolvedChainType || "evm");
+  db.setIdentity("sandbox", config.sandboxId || "");
   const storedAutomatonId = db.getIdentity("automatonId");
   const automatonId = storedAutomatonId || config.sandboxId || randomUUID();
   if (!storedAutomatonId) {
